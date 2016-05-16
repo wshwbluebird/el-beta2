@@ -6,7 +6,7 @@ package mygame;
 
 import bean.SpirSamuri;
 import com.jme3.app.Application;
-import com.jme3.app.SimpleApplication;
+import com.jme3.app.SimpleApplication; 
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.asset.AssetManager;
@@ -39,8 +39,6 @@ public class SamuriTestState2 extends AbstractAppState{
     
     private int clicktime = 0;
     private Vector3f locbase = new Vector3f(-7.5f, 0.2f, -6.5f);
-    private Sphere bb = new
-                      Sphere(16, 16, 0.2f);
     public static SpirSamuri spirsamuri = new SpirSamuri(4, 2, 14,14 );
     private int currentEnergy = spirsamuri.energy;
     private final static Trigger TRIGGER_Choose =

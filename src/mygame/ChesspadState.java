@@ -16,7 +16,6 @@ import com.jme3.effect.ParticleMesh;
 import com.jme3.light.DirectionalLight;
 import com.jme3.light.SpotLight;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -28,6 +27,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Spatial;
+import com.jme3.ui.Picture;
 import java.awt.Color;
 
 /**
@@ -42,7 +42,7 @@ public class ChesspadState extends AbstractAppState{
     private Ray ray = new Ray();
     private static Box mesh = new Box(Vector3f.ZERO, 0.2f, 0.001f, 0.2f);
     public static final Quaternion ROLL090  = new Quaternion().fromAngleAxis(FastMath.PI/2*3,   new Vector3f(1,0,0));
-    
+    static Picture p ;
     private Vector3f locbase = new Vector3f(-7.5f, 0.2f, -6.5f);
     private Geometry[][] geom = new Geometry[15][15];
     @Override
@@ -97,8 +97,14 @@ public class ChesspadState extends AbstractAppState{
          rootNode.addLight(sun);
         // rootNode.addLight(sun2);
          rootNode.attachChild(mymodel);
-        
-        
+        p = new Picture("Pictur");
+        p.setWidth(GameStart.sx);
+        p.setHeight(GameStart.sx/3);
+        p.setImage(assetManager, "Scenes/scoreboard.png", true );
+        p.deepClone();
+        p.worldToLocal(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+        p.setLocalTranslation(0,GameStart.sy-p.getLocalScale().y , 1);
+        rootNode.attachChild(p);
          
         
         
