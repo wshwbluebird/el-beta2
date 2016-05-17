@@ -140,25 +140,6 @@ public class ChesspadState extends AbstractAppState{
         return geom;
         
    }
-      public void addFire (String name , Vector3f loc,ColorRGBA color1,ColorRGBA color2){
-        ParticleEmitter fireEffect = new ParticleEmitter("Emitter", ParticleMesh.Type.Triangle, 30);
-                  Material fireMat = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
-                   fireEffect.setName(name);
-                  fireEffect.setMaterial(fireMat);
-                  fireEffect.setLocalTranslation(loc);
-                  fireEffect.setImagesX(2); fireEffect.setImagesY(2); // 2x2 texture animation
-                 // fireEffect.setEndColor( new ColorRGBA(4f, 1f, 0f, 1f) );   // red
-                  fireEffect.setEndColor( color1); 
-                 // fireEffect.setStartColor( new ColorRGBA(3f, 1f, 3f, 2.5f) ); // yellow
-                  fireEffect.setStartColor( ColorRGBA.Black);
-                  fireEffect.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 2, 0));
-                  fireEffect.setStartSize(0.2f);
-                  fireEffect.setEndSize(0.05f);
-                  fireEffect.setGravity(0f,1f,0f);
-                  fireEffect.setLowLife(0.02f);
-                  fireEffect.setHighLife(0.2f);
-                  fireEffect.getParticleInfluencer().setVelocityVariation(0.3f);
-                  rootNode.attachChild(fireEffect);
-    }
+     
 }
  

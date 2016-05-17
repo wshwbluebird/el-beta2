@@ -2,23 +2,19 @@ package mygame;
 
 import bean.chesspadmap;
 import com.jme3.app.SimpleApplication;
-import com.jme3.effect.ParticleEmitter;
-import com.jme3.effect.ParticleMesh;
 import com.jme3.font.BitmapText;
 import com.jme3.font.Rectangle;
-import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.system.AppSettings;
+import com.jme3.texture.Texture;
 import com.jme3.ui.Picture;
 import com.jme3.util.SkyFactory;
-import java.util.List;
 
 
 /**
@@ -73,8 +69,23 @@ public class GameStart extends SimpleApplication {
         sx=settings.getWidth();
         sy=settings.getHeight();
         guiNode.detachAllChildren();
-       
         simpleRender(renderManager);
+        
+        Texture west = assetManager.loadTexture("Scenes/west.png");
+        Texture east = assetManager.loadTexture("Scenes/east.png");
+        Texture north = assetManager.loadTexture("Scenes/south.png");
+        Texture south = assetManager.loadTexture("Scenes/north.png");
+        Texture up = assetManager.loadTexture("Scenes/up.png");
+        Texture down = assetManager.loadTexture("Scenes/down.png");
+//        Texture west = assetManager.loadTexture("Scenes/lagoon_west.jpg");
+//        Texture east = assetManager.loadTexture("Scenes/lagoon_east.jpg");
+//        Texture north = assetManager.loadTexture("Scenes/lagoon_north.jpg");
+//        Texture south = assetManager.loadTexture("Scenes/lagoon_south.jpg");
+//        Texture up = assetManager.loadTexture("Scenes/lagoon_up.jpg");
+//        Texture down = assetManager.loadTexture("Scenes/lagoon_down.jpg");
+
+        Spatial sky = SkyFactory.createSky(assetManager, west, east, north, south, up, down);
+        rootNode.attachChild(sky);
         Picture p = new Picture("Pictur");
         p.setWidth(sx/8);
         p.setHeight(sy/9);
@@ -107,64 +118,57 @@ public class GameStart extends SimpleApplication {
         int num= 180-right;
         roundText.setText(""+num);        
         guiNode.detachAllChildren();
-        guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
-        BitmapText heText = new BitmapText(guiFont, false);
-        heText.setSize(guiFont.getCharSet().getRenderedSize());
-        heText.setText("Team1: "+num1 +"  vs  Team2: "+num2);
-        heText.setColor(ColorRGBA.Blue);
-        heText.setLocalTranslation(400, heText.getLineHeight()+700, 0);
-        //第一座坐标距左端的距离
-        heText.setLocalScale(2);
-        guiNode.attachChild(heText);
+        
+        
        float y;
        float yp = sx/3;
-        y = sy-yp/100*9-roundText.getHeight()/2;   
+        y = sy-yp/100*7-roundText.getHeight()/2;   
         roundText.setColor(ColorRGBA.Blue);
-        roundText.setSize(guiFont.getCharSet().getRenderedSize());
+        roundText.setSize(yp/11);
         roundText.setLocalTranslation(sx/2-roundText.getLineWidth()/2,y, 1);
         guiNode.attachChild(roundText);
         roundText.setColor(ColorRGBA.Blue);
-        num1Text.setSize(guiFont.getCharSet().getRenderedSize());
+        num1Text.setSize(yp/11);
         num1Text.setLocalTranslation(sx/18*7-num1Text.getLineWidth()/2,y, 1);
         num1Text.setText(""+num1);
         guiNode.attachChild(num1Text);
         num2Text.setColor(ColorRGBA.Blue);
-        num2Text.setSize(guiFont.getCharSet().getRenderedSize());
+        num2Text.setSize(yp/11);
         num2Text.setLocalTranslation(sx/18*11-num2Text.getLineWidth()/2,y, 1);
         num2Text.setText(""+num2);
         guiNode.attachChild(num2Text);
-        y = sy-yp/100*15-sw1Text.getHeight()/2;
+        y = sy-yp/100*13-sw1Text.getHeight()/2;
         sw1Text.setColor(ColorRGBA.Blue);
-        sw1Text.setSize(guiFont.getCharSet().getRenderedSize());
+        sw1Text.setSize(yp/11);
         sw1Text.setLocalTranslation(sx/100*25-sw1Text.getLineWidth()/2,y, 1);
         sw1Text.setText(""+SamuriTestState3.swordsamuri.fields);
         guiNode.attachChild(sw1Text);
         sw2Text.setColor(ColorRGBA.Blue);
-        sw2Text.setSize(guiFont.getCharSet().getRenderedSize());
+        sw2Text.setSize(yp/11);
         sw2Text.setLocalTranslation(sx/100*75-sw2Text.getLineWidth()/2,y, 1);
         sw2Text.setText(""+SamuriTestState4.swordsamuri.fields);
         guiNode.attachChild(sw2Text);
         
-        y = sy-yp/100*23-ax1Text.getHeight()/2;
+        y = sy-yp/100*21-ax1Text.getHeight()/2;
         ax1Text.setColor(ColorRGBA.Blue);
-        ax1Text.setSize(guiFont.getCharSet().getRenderedSize());
+        ax1Text.setSize(yp/11);
         ax1Text.setLocalTranslation(sx/100*27-ax1Text.getLineWidth()/2,y, 1);
         ax1Text.setText(""+SamuriTestState5.axsamuri.fields);
         guiNode.attachChild(ax1Text);
         ax2Text.setColor(ColorRGBA.Blue);
-        ax2Text.setSize(guiFont.getCharSet().getRenderedSize());
+        ax2Text.setSize(yp/11);
         ax2Text.setLocalTranslation(sx/100*73-sw2Text.getLineWidth()/2,y, 1);
         ax2Text.setText(""+SamuriTestState6.axsamuri.fields);
         guiNode.attachChild(ax2Text);
         
-        y = sy-yp/100*32-sp1Text.getHeight()/2;
+        y = sy-yp/100*30-sp1Text.getHeight()/2;
         sp1Text.setColor(ColorRGBA.Blue);
-        sp1Text.setSize(guiFont.getCharSet().getRenderedSize());
+        sp1Text.setSize(yp/11);
         sp1Text.setLocalTranslation(sx/100*29-sw1Text.getLineWidth()/2,y, 1);
         sp1Text.setText(""+SamuriTestState.spirsamuri.fields);
         guiNode.attachChild(sp1Text);
         sp2Text.setColor(ColorRGBA.Blue);
-        sp2Text.setSize(guiFont.getCharSet().getRenderedSize());
+        sp2Text.setSize(yp/11);
         sp2Text.setLocalTranslation(sx/100*71-sw2Text.getLineWidth()/2,y, 1);
         sp2Text.setText(""+SamuriTestState2.spirsamuri.fields);
         guiNode.attachChild(sp2Text);
